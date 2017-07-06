@@ -6,11 +6,7 @@ The files of the applications are:
 ui.R
 server.R
 
-The application is accesible in: https://ibon.shinyapps.io/BMI_app/
+The application is accesible in: <https://sanling.shinyapps.io/developing_data_products/>
+
 A presentation of the application is disigned using slidify. The presentation could be visualized in:
-
-http://ibonaranburu.github.io/Data-Product-Presentation/index.html
-
-or in:
-
-http://rpubs.com/ibonaranburu/21292
+http://rpubs.com/Leslie/Shiny
