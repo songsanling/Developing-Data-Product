@@ -1,21 +1,18 @@
-library(shiny)
-library(RCurl)
-library(caret)
-mpg <- getURL("http://robertkevinackerman.com/wp-content/uploads/2014/08/mpg.csv")
-mpg <- read.csv(text = mpg)
-modFit <- train(mpg ~ cyl + disp + horse + weight + accel + year + origin, method="glm", data=mpg)
+library(shiny) 
+
+BMI<-function(weight,height) {weight/(height^2)}
+
+diagnostic_f<-function(weight,height){
+        BMI_value<-weight/(height^2)
+        ifelse(BMI_value<18.5,"underweight",ifelse(BMI_value<25,"normal weight",ifelse(BMI_value<30,"overweight","obesity")))
+}
+
 shinyServer(
-  function(input, output) { 
-    #pred = predict(modFit, data)
-    #output$prediction <- renderPrint ({as.string(pred)})
-    output$prediction <- renderPrint ({
-      cyl = input$cyl
-      disp = input$disp
-      horse = input$horse
-      weight = input$weight
-      accel = input$accel
-      year = input$year
-      origin = input$origin
-      predict(modFit,data.frame(cyl, disp, horse, weight, accel, year, origin))})
-  }
+        function(input, output) {
+                
+                output$inputweightvalue <- renderPrint({input$weight})
+                output$inputheightvalue <- renderPrint({input$height})
+                output$estimation <- renderPrint({BMI(input$weight,input$height)})
+                output$diagnostic <- renderPrint({diagnostic_f(input$weight,input$height)})
+        } 
 )
