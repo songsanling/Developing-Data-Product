@@ -1,25 +1,35 @@
-library(shiny)
-library(caret)
-shinyUI (
-  pageWithSidebar (
-    # Application title
-    headerPanel ("Predict Your Vehicle's MPG"),
-    
-    sidebarPanel (
-      numericInput('cyl', 'Cylinders', 4, min = 3, max= 8, step = 1),
-      numericInput('disp', 'Displacement', 190, min = 70, max= 450, step = 10),
-      numericInput('horse', 'Horsepower', 100, min = 50, max= 230, step = 5),
-      numericInput('weight', 'Weight', 3000, min = 1650, max= 5000, step = 50),
-      numericInput('accel', 'Acceleration', 15, min = 8, max= 24, step = 1),
-      numericInput('year', 'Year', 75, min = 70, max= 82, step = 1),
-      numericInput('origin', 'Origin', 2, min = 1, max= 3, step = 1),
-      submitButton('Submit')
-      ),
-    mainPanel (
-      h3 ('Results of prediction'),
-      h4 ('Your Vehicle\'s Predicted MPG:'),
-      textOutput("prediction")
-      )
-    )
-
+library(shiny) 
+shinyUI(
+        pageWithSidebar(
+                # Application title
+                headerPanel("Body Mass Index (BMI) Calculator"),
+                
+                sidebarPanel(
+                        numericInput('weight', 'Insert your weight in kilograms', 70) ,
+                        numericInput('height', 'Insert your height in metres', 1.70, min = 0.2, max = 3, step = 0.01),
+                        submitButton('Submit')
+                ), 
+                mainPanel(
+                        p('The Body mass index (BMI) is a measure of body fat based on height and weight that applies to adult men and women.'),
+                        p('Regarding the BMI measure, the World Health Organization (WHO) proposes the following classification:'),
+                        tags$div(
+                                tags$ul(
+                                        tags$li('BMI <18.5       : Underweight'),
+                                        tags$li('BMI [18.5-24.9] : Normal weight'),
+                                        tags$li('BMI [25-29.9]   : Overweight'),
+                                        tags$li('BMI >=30        : Obesity')
+                                )
+                        ),
+                     
+                        h4('Taking into account the values entered by you:'), 
+                        p('weight:'), verbatimTextOutput("inputweightvalue"),
+                        p('height:'), verbatimTextOutput("inputheightvalue"),
+                        h4('Your BMI is:'),
+                        verbatimTextOutput("estimation"),
+                        p('It means that you are:'),strong(verbatimTextOutput("diagnostic"))
+                        
+                        
+                )
+                
+        )   
 )
